@@ -11,3 +11,5 @@ public class OufoodpantryApplication {
 	}
 
 }
+// TO RUN: in cmd type mvn spring-boot:run, make sure you have maven and stuff installed
+// TO STOP: CTRL+C
