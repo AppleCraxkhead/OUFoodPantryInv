@@ -25,12 +25,10 @@ public class InventoryService {
     public static List<Item> readItemsFromJson() { // This method reads the JSON file and returns an ArrayList
         List<Item> items = new ArrayList<>();
         try {
-            // Ensure the file exists
             if (!Files.exists(Paths.get(JSON_FILE_PATH))) {
                 Files.createDirectories(Paths.get(JSON_FILE_PATH).getParent());
                 Files.createFile(Paths.get(JSON_FILE_PATH));
             }
-            // Use FileInputStream to read from the new file path
             try (InputStream is = new FileInputStream(JSON_FILE_PATH)) {
                 JsonReader reader = Json.createReader(is);
                 JsonArray jsonArray = reader.readArray();
@@ -67,13 +65,13 @@ public class InventoryService {
     }
     public static void addItemToJson(String itemName) {
         List<Item> items = readItemsFromJson();
-        items.add(new Item(itemName, 0)); // Add the new item with an amount of 0
-        writeItemsToJson(items); // Use the writeItemsToJson method to avoid code duplication
+        items.add(new Item(itemName, 0)); 
+        writeItemsToJson(items); 
     }
     public static void deleteItemFromJson(String itemName) {
-        List<Item> items = readItemsFromJson(); // read current items
-        items.removeIf(item -> item.getName().equals(itemName)); // remove the item with the given name
-        writeItemsToJson(items); // write the updated list back to the JSON file
+        List<Item> items = readItemsFromJson();
+        items.removeIf(item -> item.getName().equals(itemName));
+        writeItemsToJson(items);
     }
     
     private static void writeItemsToJson(List<Item> items) {
@@ -85,20 +83,30 @@ public class InventoryService {
         }
         JsonArray jsonArray = jsonArrayBuilder.build();
     
-        // Convert the JsonArray to a string to write it to the file
         StringWriter stringWriter = new StringWriter();
         try (JsonWriter jsonWriter = Json.createWriter(stringWriter)) {
             jsonWriter.writeArray(jsonArray);
         }
     
         try {
-            // Use FileOutputStream to write to the new file path
+            
             try (FileOutputStream fos = new FileOutputStream(JSON_FILE_PATH)) {
                 fos.write(stringWriter.toString().getBytes());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static void updateItemAmountInJson(String itemName, int newAmount) {
+        List<Item> items = readItemsFromJson();
+        for (Item item : items) {
+            if (item.getName().equals(itemName)) {
+                item.setAmount(newAmount);
+                break; 
+            }
+        }
+
+        writeItemsToJson(items); 
     }
 }
 

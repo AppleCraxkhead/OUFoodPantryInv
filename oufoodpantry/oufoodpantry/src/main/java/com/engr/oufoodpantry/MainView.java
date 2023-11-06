@@ -7,6 +7,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import java.util.List;
+import com.vaadin.flow.component.UI;
 
 
 @Route("dashboard")
@@ -22,7 +23,7 @@ public class MainView extends VerticalLayout {
             ui.navigate("add-item"));
         });
         
-        Button scanButton = new Button("Scan");
+        Button scanButton = new Button("Scan - (W.I.P)");
         scanButton.addClickListener(event -> {
             // Logic for scanning
         });
@@ -56,9 +57,13 @@ private HorizontalLayout createItemRow(Item item) {
         // Reload the UI
         getUI().ifPresent(ui -> ui.getPage().reload());
     });
+    // Inside createItemRow method in MainView.java
 
-    // Return a layout with the item name, count, and delete button
-    return new HorizontalLayout(itemNameField, countField, deleteButton);
+    Button editButton = new Button("Edit", e -> {
+    // You will pass the item name as a parameter to the EditAmounts view
+    UI.getCurrent().navigate("editamounts/" + item.getName());
+    });
+    return new HorizontalLayout(itemNameField, countField, editButton, deleteButton);
 }
 
 }
