@@ -1,0 +1,9 @@
+.dark-background {
+    background-color: #333333; /* Dark Grey Background */
+    color: white; /* White Text */
+}
+
+.crimson-button {
+    background-color: crimson;
+    color: white;
+}

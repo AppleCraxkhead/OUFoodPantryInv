@@ -8,22 +8,27 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import java.util.List;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.dependency.CssImport;
 
 
-@Route("dashboard")
+@CssImport("./styles/styles.css")
+@Route("/")
 public class MainView extends VerticalLayout {
 
     public MainView() {
+        addClassName("dark-background");
         List<Item> items = InventoryService.readItemsFromJson();
         
         // Top Navigation Bar
         Button addItemButton = new Button("Add Item");
+        addItemButton.addClassName("crimson-button");
         addItemButton.addClickListener(event -> {
             event.getSource().getUI().ifPresent(ui -> 
             ui.navigate("add-item"));
         });
         
         Button scanButton = new Button("Scan - (W.I.P)");
+        addItemButton.addClassName("crimson-button");
         scanButton.addClickListener(event -> {
             // Logic for scanning
         });
@@ -37,7 +42,6 @@ public class MainView extends VerticalLayout {
         }
 
 
-        // Footer
         add(new TextField("University of Oklahoma Food Pantry"));
     }
 

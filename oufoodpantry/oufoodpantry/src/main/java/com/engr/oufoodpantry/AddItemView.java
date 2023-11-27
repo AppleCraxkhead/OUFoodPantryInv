@@ -30,7 +30,7 @@ public class AddItemView extends VerticalLayout {
                     //MAYBE HAVE TO CALL READFILES AGAIN?
                     Notification.show("Item added: " + itemName);
                     doneButton.getUI().ifPresent(ui ->
-                    ui.navigate("dashboard"));
+                    ui.navigate("/"));
             }
         });
 
