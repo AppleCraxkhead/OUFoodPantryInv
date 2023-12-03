@@ -28,7 +28,7 @@ public class MainView extends VerticalLayout {
         });
         
         Button scanButton = new Button("Scan - (W.I.P)");
-        addItemButton.addClassName("crimson-button"); // TODO : Add this line below buttons to make them crimson
+        addItemButton.addClassName("crimson-button");
         scanButton.addClickListener(event -> {
             // Logic for scanning
         });
@@ -44,7 +44,7 @@ public class MainView extends VerticalLayout {
 
         add(new TextField("University of Oklahoma Food Pantry"));
     }
-// TODO : make text fields and Edit/Delete buttons visible with dark grey background
+
 // Helper method to create a row for an item
 private HorizontalLayout createItemRow(Item item) {
     TextField itemNameField = new TextField();
